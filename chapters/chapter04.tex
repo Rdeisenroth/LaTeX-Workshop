@@ -1,0 +1,83 @@
+\documentclass[
+    ngerman,
+    accentcolor=3b,
+    dark_mode,
+    fontsize= 12pt,
+    a4paper,
+    aspectratio=169,
+    colorback=true,
+    fancy_row_colors,
+    leqno,
+    fleqn,
+    boxarc=3pt,
+    fleqn,
+    % shell_escape = false, % Kompatibilität mit sharelatex
+]{algoslides}
+
+%%------------%%
+%%--Packages--%%
+%%------------%%
+
+% \usepackage{audutils}
+% \usepackage{fopbot}
+\usepackage{booktabs}
+\usepackage{tipa}
+
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+% \subimport*{../../}{preamble}
+
+%%--------------------------%%
+%%--Imports from Main File--%%
+%%--------------------------%%
+
+% Get Labels from Main Document using the xr-hyper Package
+\externaldocument[ext:]{../main}
+% Set Graphics Path, so pictures load correctly
+\graphicspath{{../pictures}}
+\def\codeDir{../code}
+
+\begin{document}
+    \section{Challenges}\label{4}\label{Challenges}
+    \subsection{Aufgabe 1: Hello World}
+    \begin{frame}[fragile]
+        \slidehead{}
+        Minimales Textdokument mit Klasse \texttt{article} und \texttt{a4paper} mit dem Text \verb+Hello World+.
+    \end{frame}
+    \subsection{Aufgabe 2: Blindtext}
+    \begin{frame}[fragile]
+        \slidehead{}
+        Textdokument mit 2 seiten Blindtext
+    \end{frame}
+    \subsection{Aufgabe 3: Mathematische Formel}
+    \begin{frame}[fragile]
+        \slidehead{}
+        Tippen Sie die folgende Formel ein:
+        \begin{defBox}
+            \fatsf{Mitternachtsformel}
+            Für eine Polynom zweiten Grades in der Form $a\cdot x^2+b\cdot x + c$ \\gilt für $a,b,c \in \mathbb{R}$ immer:%
+
+            \begin{align}
+                x_{1/2} & =\frac{-b\pm\sqrt{b^{2}-4\cdot a \cdot c}}{2\cdot a}
+            \end{align}
+
+        \end{defBox}
+    \end{frame}
+    \subsection{Aufgabe 4: Tabelle}
+    \begin{frame}[fragile]
+        \slidehead{}
+        Tippen Sie die folgende Formel ein:
+        \begin{table}[ht]
+            \centering
+            \begin{tabular}{l|c|r}
+                \textbf{links} & \textbf{mitte} & \textbf{rechts} \\
+                \hline
+                a              & b              & c               \\
+                d              & e              & f               \\
+                g              & h              & i               \\
+                j              & k              & l
+            \end{tabular}
+            \caption{Test-Tabelle}
+            \label{tab:Test}
+        \end{table}
+    \end{frame}
+\end{document}

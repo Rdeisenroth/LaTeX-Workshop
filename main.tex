@@ -22,7 +22,7 @@
 % \usepackage{audutils}
 % \usepackage{fopbot}
 \usepackage{booktabs}
-\usepackage{etoolbox}
+\usepackage{tipa}
 
 
 %%----------------------------%%
@@ -40,12 +40,12 @@
 %%---------------------------%%
 
 % Workshop-Individuelle Einstellungen
-\def\workshoptitle{<Workshoptitel>}
-\def\shortworkshoptitle{<Kurztitel>}
-\subtitle{<Subtitel>}
-\def\gruesswoerte{<Begrüßende Worte>}
-\author{<Autor1>\and<Autor2>}
-\titlegraphic*{\includegraphics{example-image}}
+\def\workshoptitle{\LaTeX}
+\def\shortworkshoptitle{\LaTeX}
+\subtitle{Einsteiger Workshop}
+\def\gruesswoerte{Gude}
+\author{Ruben Deisenroth}
+\titlegraphic*{\includegraphics{LaTeX-Wallpaper.png}}
 
 
 % Ophase-Einstellungen
@@ -65,6 +65,7 @@
 \department{TU Darmstadt | Fachbereich Informatik | \ophase{} | \insertshorttitle{}}
 \date{\today}
 \logo*{\includegraphics{d120-logo.png}}
+\def\codeDir{code}
 
 %%-------------------------%%
 %%--Beginn des Dokumentes--%%
@@ -98,4 +99,7 @@
     %%-----------%%
 
     \input{chapters/chapter01}
+    \input{chapters/chapter02}
+    \input{chapters/chapter03}
+    \input{chapters/chapter04}
 \end{document}

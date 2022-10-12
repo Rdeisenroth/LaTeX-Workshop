@@ -21,6 +21,7 @@
 % \usepackage{audutils}
 % \usepackage{fopbot}
 \usepackage{booktabs}
+\usepackage{tipa}
 
 % Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
 % \subimport*{../../}{preamble}
@@ -36,7 +37,40 @@
 
 \begin{document}
     \section{Einführung}\label{1}\label{Einfuehrung}
+    \subsection{Was ist \LaTeX?}\label{1.1}\label{1.1}
+    \begin{frame}[c]
+        \slidehead{}
+        \centering\fontsize{40pt}{45pt}\selectfont\LaTeX
+
+        %ˈlaːtɛç
+        \medskip\normalsize\textipa{[\textprimstress{}latE\c{c}]}
+
+        \vfill
+        LaTeX ist eine Programmiersprache zur Erstellung von PDF-Dokumenten. Erstveröffentlichung 1984
+    \end{frame}
+    \subsection{Idee von \LaTeX}\label{1.2}\label{1.2}
     \begin{frame}
         \slidehead{}
+        \begin{itemize}
+            \item Trennung von Inhalt und Design
+            \item Häufig verwendeten Code in wiederverwendbaren Commands zusammenfassen
+            \item Man erhält \fatsf{exakt} das, was man hinschreibt
+            \item Der \LaTeX-Quellcode wird zu PDF (oder SVG) kompiliert
+        \end{itemize}
+    \end{frame}
+    \subsection{Anwendungsmöglichkeiten}
+    \begin{frame}
+        \slidehead{}
+        \begin{itemize}
+            \item Arbeiten (z.B. Thesis)
+            \item Hausübungsabgaben
+            \item Zusammenfassungen
+            \item Präsentationen (wie diese)
+            \item Handouts
+            \item Wissenschaftliches Zeichnen (z.B. Schaltplan, Diagramme, Moleküle, $\dots$)
+            \item Vektorgrafiken
+            \item Musik komponieren
+            \item $\dots$
+        \end{itemize}
     \end{frame}
 \end{document}

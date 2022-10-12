@@ -1,0 +1,113 @@
+\documentclass[
+    ngerman,
+    accentcolor=3b,
+    dark_mode,
+    fontsize= 12pt,
+    a4paper,
+    aspectratio=169,
+    colorback=true,
+    fancy_row_colors,
+    leqno,
+    fleqn,
+    boxarc=3pt,
+    fleqn,
+    % shell_escape = false, % Kompatibilität mit sharelatex
+]{algoslides}
+
+%%------------%%
+%%--Packages--%%
+%%------------%%
+
+% \usepackage{audutils}
+% \usepackage{fopbot}
+\usepackage{booktabs}
+\usepackage{tipa}
+
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+% \subimport*{../../}{preamble}
+
+%%--------------------------%%
+%%--Imports from Main File--%%
+%%--------------------------%%
+
+% Get Labels from Main Document using the xr-hyper Package
+\externaldocument[ext:]{../main}
+% Set Graphics Path, so pictures load correctly
+\graphicspath{{../pictures}}
+\def\codeDir{../code}
+
+\begin{document}
+    \section{\LaTeX-Basics}\label{2}\label{LaTeX-Basics}
+    \subsection{Syntax}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{itemize}
+            \item Zeichen mit besonderer Bedeutung: \verb+\+, \verb+&+, \verb+#+, \verb+$+, \verb+%+, \verb+~+, \verb+^+, \verb+_+, \verb+{+, \verb+}+, \verb+[+ und \verb+]+
+            \item Kommandos beginnen mit einem Backslask: \verb+\+
+            \item Kommandonamen enthalten keine Zahlen, Leerzeichen und Sonderzeichen
+            \item Argumente werden in geschweiften Klammern angegeben \verb+{}+
+            \item Optionale Argumente werden in eckigen Klammern angegeben \verb+[]+
+            \item Environments werden mit \verb+\begin{<name>}+ und \verb+\end{<name>}+ angegeben
+            \item Kommentare beginnen mit einem \verb+%+
+            \item Parameter werden mit \verb+#+ angegeben und gehen von 1-9\begin{itemize}
+                    \item Dabei wird für innere Argumente die Anzahl der \verb+#+ verdoppelt (z.B. \verb+#1+, \verb+##1+, \verb+####1+)
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+    \subsection{Aufbau eines Dokumentes}\label{2.1}\label{2.1}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal-lipsum.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal-lipsum}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \subsection{Overleaf-Instanz}\label{2.2}\label{2.2}
+    \begin{frame}
+        \slidehead{}
+        \begin{itemize}
+            \item Ofahrt-Intern: \url{latex.ofahrt2022.de}
+            \item TU-Darmstadt: \url{sharelatex01.ca.hrz.tu-darmstadt.de/}
+        \end{itemize}
+
+    \end{frame}
+    % \subsection{Formeln}
+    % \begin{frame}[fragile]
+    %     \slidehead{}
+    %     \begin{columns}[c]
+    %         \begin{column}{.5\textwidth}
+
+    %         \end{column}%
+    %         \begin{column}{.5\textwidth}
+    %             \centering
+    %             \colorbox{white}{%
+    %                 \color{black}
+    %                 \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal-lipsum}
+    %             }
+    %         \end{column}
+    %     \end{columns}
+    % \end{frame}
+\end{document}
