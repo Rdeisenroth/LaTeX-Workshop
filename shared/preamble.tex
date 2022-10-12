@@ -80,7 +80,26 @@
         \tableofcontents[
             currentsection,
             currentsubsection,
-            subsectionstyle=show/shaded/hide
+            subsectionstyle=show/shaded/hide,
+            % hide subsubsection
+            subsubsectionstyle=hide,
         ]
     \end{frame}
 }
+
+% \DeclareDocumentCommand{\coderesultslide}{+m+v}{
+%     \begin{frame}[c,fragile]
+%         \slidehead{}
+%         \begin{columns}[c]
+%             \begin{column}{.5\textwidth}
+%                 \begin{codeBlock}[highlightlines={5}]{minted language=latex,title=\codeBlockTitle{#1}}
+%                     #2
+%                 \end{codeBlock}
+%             \end{column}%
+%             \begin{column}{.5\textwidth}
+%                 \centering
+%                 Der Satz $a^2+b^2=c^2$ ist der Pythagoras-Satz.
+%             \end{column}
+%         \end{columns}
+%     \end{frame}
+% }

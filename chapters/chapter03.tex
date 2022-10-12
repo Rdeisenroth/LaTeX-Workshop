@@ -63,7 +63,7 @@
             \end{column}
         \end{columns}
     \end{frame}
-    %\subsubsection{Dokumentenklasse}
+    \subsubsection{Dokumentenklasse}
     \begin{frame}[fragile]
         \slidehead{}
         \begin{columns}[c]
@@ -82,11 +82,73 @@
             \end{column}
         \end{columns}
     \end{frame}
+
+    \begin{frame}[c,fragile]
+        \slidehead{}
+        Häufig verwendete Dokumentenklassen:
+        \begin{itemize}
+            \item \verb+article+ (Standardklasse für allgemeine Dokumente)
+            \item \verb+book+ (Bücher)
+            \item \verb+beamer+ (Präsentationen)
+            \item \verb+standalone+ (Allenstehende Abbildungen)
+        \end{itemize}
+        \pause{}
+        Klassen des Corporatedesigns der TU Darmstadt:
+        \begin{itemize}
+            \item \verb+tudapub+ (Standardklasse für allgemeine Publikationen)
+            \item \verb+tudaexercise+ (Übungsblätter)
+            \item \verb+tudabeamer+ (Präsentationen)
+        \end{itemize}
+
+        \pause{}Und viele mehr...
+    \end{frame}
+
+    \subsubsection{Dokumenteninhalt}
     \begin{frame}[fragile]
         \slidehead{}
         \begin{columns}[c]
             \begin{column}{.5\textwidth}
-                \inputCode[]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal-lipsum.tex}
+                \inputCode[highlightlines={2,4}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Minimales \LaTeX-Dokument},
+                }{\codeDir/minimal.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={3}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Minimales \LaTeX-Dokument},
+                }{\codeDir/minimal.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \subsubsection{Pakete}
+
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={3}]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal-lipsum.tex}
             \end{column}%
             \begin{column}{.5\textwidth}
                 \centering
@@ -97,6 +159,23 @@
             \end{column}
         \end{columns}
     \end{frame}
+
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={5}]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal-lipsum.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal-lipsum}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
     \subsection{Sharelatex-Instanz}\label{2.2}\label{2.2}
     % \begin{frame}[c]
     %     \slidehead{}

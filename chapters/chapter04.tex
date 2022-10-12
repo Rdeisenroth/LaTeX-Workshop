@@ -14,22 +14,12 @@
     % shell_escape = false, % Kompatibilität mit sharelatex
 ]{algoslides}
 
-%%------------%%
-%%--Packages--%%
-%%------------%%
-
-% \usepackage{audutils}
-% \usepackage{fopbot}
-\usepackage{booktabs}
-\usepackage{tipa}
-
-% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
-% \subimport*{../../}{preamble}
-
 %%--------------------------%%
 %%--Imports from Main File--%%
 %%--------------------------%%
-
+\usepackage{import}
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+\subimport*{../shared}{preamble}
 % Get Labels from Main Document using the xr-hyper Package
 \externaldocument[ext:]{../main}
 % Set Graphics Path, so pictures load correctly
@@ -37,47 +27,348 @@
 \def\codeDir{../code}
 
 \begin{document}
-    \section{Challenges}\label{4}\label{Challenges}
-    \subsection{Aufgabe 1: Hello World}
-    \begin{frame}[fragile]
+    \section{Mathematische Formeln}
+    \subsection{Unterschiedliche Mathemodi}
+    \begin{frame}[c, fragile]
         \slidehead{}
-        Minimales Textdokument mit Klasse \texttt{article} und \texttt{a4paper} mit dem Text \verb+Hello World+.
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=3.5cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Inline-Mathe Modus}
+            }
+            die Formel $a^2+b^2=c^2$ ist der Pythagoras-Satz.
+        \end{codeBlock}
+        %\end{noindent}
+        \begin{itemize}
+            \item Inline-Mathe Modus ist für kurze Formeln geeignet
+            \item Die Formeln werden im Fließtext platziert
+        \end{itemize}
     \end{frame}
-    \subsection{Aufgabe 2: Blindtext}
-    \begin{frame}[fragile]
-        \slidehead{}
-        Textdokument mit 2 seiten Blindtext
-    \end{frame}
-    \subsection{Aufgabe 3: Mathematische Formel}
-    \begin{frame}[fragile]
-        \slidehead{}
-        Tippen Sie die folgende Formel ein:
-        \begin{defBox}
-            \fatsf{Mitternachtsformel}
-            Für eine Polynom zweiten Grades in der Form $a\cdot x^2+b\cdot x + c$ \\gilt für $a,b,c \in \mathbb{R}$ immer:%
 
-            \begin{align}
-                x_{1/2} & =\frac{-b\pm\sqrt{b^{2}-4\cdot a \cdot c}}{2\cdot a}
-            \end{align}
-
-        \end{defBox}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Display-Mathe Modus}
+            }
+            die Formel $$a^2+b^2=c^2$$ ist der Pythagoras-Satz.
+        \end{codeBlock}
+        %\end{noindent}
+        \begin{itemize}
+            \item Display-Mathe Modus ist für längere Formeln geeignet
+            \item Formeln werden in eigener Zeile zentriert angezeigt
+        \end{itemize}
     \end{frame}
-    \subsection{Aufgabe 4: Tabelle}
+
+    \subsection{Mathe-Modus vs Text-Modus}
+    \begin{frame}[c,fragile]
+        \slidehead{}
+        Im Mathe-Modus:
+        \begin{itemize}
+            \item werden Leerzeichen ignoriert
+            \item werden Zeilenumbrüche ignoriert
+            \item haben die meisten Zeichen eine besondere Bedeutung (z.B. \verb|_| und \verb|^|)
+            \item können mathematische Symbole verwendet werden
+            \item können keine \enquote{reinen Text-Befehle} verwendet werden
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Textarten im Text-Modus}
+            }
+            \textbf{Fetter Text}\\
+            \textit{Kursiver Text}\\
+            \texttt{Monospaced Text}\\
+            \textsc{Kapitälchen}\\
+            \textsf{Sans Serif}\\
+            \textsl{Schräg}\\
+            \textup{Normal}\\
+            \textmd{Medium}\\
+            \textbf{\textit{Fetter Kursiver Text}}
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Textarten im Mathe-Modus}
+            }
+            $\mathbf{Fetter Text}$\\
+            $\mathit{Kursiver Text}$\\
+            $\mathtt{Monospaced Text}$\\
+            $\mathsf{Sans Serif}$\\
+            $\mathrm{Normal}$\\
+            $\mathbf{\mathit{Fetter Kursiver Text}}$
+            $\text{Text im Mathe-Modus}$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[highlightlines={7}]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Textarten im Mathe-Modus}
+            }
+            $\mathbf{Fetter Text}$\\
+            $\mathit{Kursiver Text}$\\
+            $\mathtt{Monospaced Text}$\\
+            $\mathsf{Sans Serif}$\\
+            $\mathrm{Normal}$\\
+            $\mathbf{\mathit{Fetter Kursiver Text}}$
+            $\text{Text im Mathe-Modus}$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \subsection{Wichtige Mathematik-Operatoren}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Hoch- und Tiefstellen}
+            }
+            $$a^2$$ % Hochstellen
+            $$a_2$$ % Tiefstellen
+            $$a^2_2$$ % Hoch- und Tiefstellen
+            $$a_2^2bc$$
+            $$a^{2n}b$$
+            $$a_{2n}b$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Grichische Buchstaben}
+            }
+            $$\alpha$$
+            $$\beta$$
+            $$\gamma$$
+            $$\Gamma$$
+            $$\dots$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Modifikatoren}
+            }
+            $$\underline{\phi}$$
+            $$\overline{\varphi}$$
+            $$\overbrace{(a+b)}^{\text{Teil a}}$$
+            $$\underbrace{(a+b)}_{\text{Teil b}}$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Modifikatoren (2)}
+            }
+            $$\hat{\delta}$$
+            $$\vec{a}$$
+            $$\dot{\psi}$$
+            $$\ddot{\Psi}$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Pfeile}
+            }
+            $$\leftarrow, \rightarrow$$
+            $$\uparrow, \downarrow$$
+            $$\leftrightarrow, \updownarrow$$
+            $$\Leftarrow$$
+            $$\longleftarrow$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Relationen}
+            }
+            $$<, >, \leq, \geq$$
+            $$=, \neq, \approx$$
+            $$\equiv, \sim$$
+            $$\in, \notin$$
+            $$\subset, \supset$$
+            $$\subseteq, \supseteq$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
     \begin{frame}[fragile]
         \slidehead{}
-        Tippen Sie die folgende Formel ein:
-        \begin{table}[ht]
-            \centering
-            \begin{tabular}{l|c|r}
-                \textbf{links} & \textbf{mitte} & \textbf{rechts} \\
-                \hline
-                a              & b              & c               \\
-                d              & e              & f               \\
-                g              & h              & i               \\
-                j              & k              & l
-            \end{tabular}
-            \caption{Test-Tabelle}
-            \label{tab:Test}
-        \end{table}
+        Und noch viel mehr...
+
+        \vspace{\fill}
+        \begin{center}
+            \Large\fatsf{Wie soll man sich da bitte noch zurechtfinden???}
+        \end{center}
     \end{frame}
+
+    \urlslide[Detexify - Symbol Zeichnen und Befehl finden]{https://detexify.kirelabs.org}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Brüche}
+            }
+            $$\frac{a}{2\cdot b}$$ % Bruch
+            $$\frac{a}{\frac{b}{c}}$$ % Bruch in Bruch
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=3cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Große Klammern}
+            }
+            $$2\cdot(\frac{a}{b}+\frac{c}{d})$$
+            $$2\cdot\left(\frac{a}{b}+\frac{c}{d}\right)$$
+            $$F=\left.
+                \frac{\partial f}{\partial x}
+                \right|_{\hat x_{k-1}}$$
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \slidehead{}
+        \vspace{\fill}
+        \begin{center}
+            \Large\fatsf{Uff, das ist aber immer noch recht kompliziert, gibt's da nicht noch eine andere Möglichkeit?!}
+        \end{center}
+    \end{frame}
+
+    \urlslide[Mathpix Snipping Tool - OCR-Erkennung von LaTeX-Formeln]{https://mathpix.com/}
 \end{document}

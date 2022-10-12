@@ -1,7 +1,7 @@
 \documentclass[
     ngerman,
     accentcolor=3b,
-    dark_mode, % uncomment for dark mode
+    % dark_mode, % uncomment for dark mode
     fontsize= 12pt,
     a4paper,
     aspectratio=169,
@@ -42,19 +42,14 @@
 
     \begin{frame}
         \frametitle{Das steht heute auf dem Plan}
-        \tableofcontents[hideallsubsections]
+        \tableofcontents[pausesections, hideallsubsections]
     \end{frame}
 
 
     %%-----------%%
     %%--Kapitel--%%
     %%-----------%%
-    \foreach \chapter in {
-        chapters/chapter01,
-        chapters/chapter02,
-        chapters/chapter03,
-        chapters/chapter04,
-    }{
-        \input{\chapter}
+    \foreach \chapter in {1,...,6}{
+        \input{chapters/chapter0\chapter}
     }
 \end{document}

@@ -1,0 +1,34 @@
+\documentclass[
+    ngerman,
+    accentcolor=3b,
+    dark_mode,
+    fontsize= 12pt,
+    a4paper,
+    aspectratio=169,
+    colorback=true,
+    fancy_row_colors,
+    leqno,
+    fleqn,
+    boxarc=3pt,
+    fleqn,
+    % shell_escape = false, % Kompatibilität mit sharelatex
+]{algoslides}
+
+%%--------------------------%%
+%%--Imports from Main File--%%
+%%--------------------------%%
+\usepackage{import}
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+\subimport*{../shared}{preamble}
+% Get Labels from Main Document using the xr-hyper Package
+\externaldocument[ext:]{../main}
+% Set Graphics Path, so pictures load correctly
+\graphicspath{{../pictures}}
+\def\codeDir{../code}
+
+\begin{document}
+    \section{Abbildungen}
+    \subsection{Bilder einfügen}
+    \subsection{Tabellen}
+    \subsection{TikZ}
+\end{document}
