@@ -1,0 +1,86 @@
+%%------------%%
+%%--Packages--%%
+%%------------%%
+
+% \usepackage{audutils}
+% \usepackage{fopbot}
+\RequirePackage{booktabs}
+\RequirePackage{tipa}
+\RequirePackage{import}
+\RequirePackage{qrcode}
+
+
+%%----------------------------%%
+%%--Stilistische Anpassungen--%%
+%%----------------------------%%
+
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+% Remove unwanted space from tables
+\aboverulesep = 0mm \belowrulesep = 0mm
+\renewcommand{\arraystretch}{1.4}
+
+% Center Captions
+\captionsetup[figure]{justification=centering}
+\captionsetup[subfigure]{justification=centering}
+\captionsetup[table]{justification=centering}
+
+%%---------------------------%%
+%%--Dokumenteneinstellungen--%%
+%%---------------------------%%
+
+% Workshop-Individuelle Einstellungen
+\def\workshoptitle{\LaTeX}
+\def\shortworkshoptitle{\LaTeX}
+\subtitle{Einsteiger Workshop}
+\def\gruesswoerte{Gude}
+\author{Ruben Deisenroth}
+\titlegraphic*{\includegraphics{LaTeX-Wallpaper.png}}
+
+
+% Ophase-Einstellungen
+\ExplSyntaxOn
+\def\summerophasename{Sommerophase}
+\def\winterophasename{Winterophase}
+\DeclareDocumentCommand{\ophase}{}{
+    \int_compare:nTF {\the\month > 4}{
+        \winterophasename\space{}\the\year-\the\numexpr\year+1\relax
+    }{
+        \summerophasename\space{}\the\year
+    }
+}
+\ExplSyntaxOff
+\title[\shortworkshoptitle{}]{\workshoptitle{}}
+\department{TU Darmstadt | Fachbereich Informatik | \ophase{} | \insertshorttitle{}}
+\date{\today}
+\logo*{\includegraphics{d120-logo.png}}
+\def\codeDir{code}
+
+\DeclareDocumentCommand{\urlslide}{om}{
+    \begin{frame}[c]
+        \slidehead{}
+        \begin{figure}
+            \centering
+            \qrcode[height=3cm]{#2}
+            \caption{\IfNoValueF{#1}{#1\\}\url{#2}}
+        \end{figure}
+    \end{frame}
+}
+
+% We want a tocslide after every \section and \subsection
+\AtBeginSection{%
+    \begin{frame}[c]
+        \frametitle{Das steht heute auf dem Plan}
+        \tableofcontents[currentsection, hideothersubsections]
+    \end{frame}
+}
+
+\AtBeginSubsection{%
+    \begin{frame}[c]
+        \frametitle{Das steht heute auf dem Plan}
+        \tableofcontents[
+            currentsection,
+            currentsubsection,
+            subsectionstyle=show/shaded/hide
+        ]
+    \end{frame}
+}

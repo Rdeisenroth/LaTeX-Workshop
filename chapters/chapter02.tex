@@ -14,26 +14,17 @@
     % shell_escape = false, % Kompatibilität mit sharelatex
 ]{algoslides}
 
-%%------------%%
-%%--Packages--%%
-%%------------%%
-
-% \usepackage{audutils}
-% \usepackage{fopbot}
-\usepackage{booktabs}
-\usepackage{tipa}
-
-% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
-% \subimport*{../../}{preamble}
-
 %%--------------------------%%
 %%--Imports from Main File--%%
 %%--------------------------%%
-
+\usepackage{import}
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+\subimport*{../shared}{preamble}
 % Get Labels from Main Document using the xr-hyper Package
 \externaldocument[ext:]{../main}
 % Set Graphics Path, so pictures load correctly
 \graphicspath{{../pictures}}
+\def\codeDir{../code}
 
 \begin{document}
     \section{Vor- und Nachteile von \LaTeX}\label{2}\label{2}

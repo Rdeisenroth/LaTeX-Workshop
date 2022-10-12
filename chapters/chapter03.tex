@@ -14,22 +14,12 @@
     % shell_escape = false, % Kompatibilität mit sharelatex
 ]{algoslides}
 
-%%------------%%
-%%--Packages--%%
-%%------------%%
-
-% \usepackage{audutils}
-% \usepackage{fopbot}
-\usepackage{booktabs}
-\usepackage{tipa}
-
-% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
-% \subimport*{../../}{preamble}
-
 %%--------------------------%%
 %%--Imports from Main File--%%
 %%--------------------------%%
-
+\usepackage{import}
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+\subimport*{../shared}{preamble}
 % Get Labels from Main Document using the xr-hyper Package
 \externaldocument[ext:]{../main}
 % Set Graphics Path, so pictures load correctly
@@ -59,7 +49,29 @@
         \slidehead{}
         \begin{columns}[c]
             \begin{column}{.5\textwidth}
-                \inputCode[]{minted language=latex,title=\codeBlockTitle{Minimales \LaTeX-Dokument}}{\codeDir/minimal.tex}
+                \inputCode[]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Minimales \LaTeX-Dokument},
+                }{\codeDir/minimal.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/minimal}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    %\subsubsection{Dokumentenklasse}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={1}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Minimales \LaTeX-Dokument},
+                }{\codeDir/minimal.tex}
             \end{column}%
             \begin{column}{.5\textwidth}
                 \centering
@@ -85,15 +97,16 @@
             \end{column}
         \end{columns}
     \end{frame}
-    \subsection{Overleaf-Instanz}\label{2.2}\label{2.2}
-    \begin{frame}
-        \slidehead{}
-        \begin{itemize}
-            \item Ofahrt-Intern: \url{latex.ofahrt2022.de}
-            \item TU-Darmstadt: \url{sharelatex01.ca.hrz.tu-darmstadt.de/}
-        \end{itemize}
-
-    \end{frame}
+    \subsection{Sharelatex-Instanz}\label{2.2}\label{2.2}
+    % \begin{frame}[c]
+    %     \slidehead{}
+    %     \begin{figure}
+    %         \centering
+    %         \qrcode[height=3cm]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
+    %         \caption{Sharelatex-Instanz der TU-Darmstadt\\\url{https://sharelatex01.ca.hrz.tu-darmstadt.de}}
+    %     \end{figure}
+    % \end{frame}
+    \urlslide[Sharelatex-Instanz der TU-Darmstadt]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
     % \subsection{Formeln}
     % \begin{frame}[fragile]
     %     \slidehead{}

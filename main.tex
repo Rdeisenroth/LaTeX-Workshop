@@ -1,7 +1,7 @@
 \documentclass[
     ngerman,
     accentcolor=3b,
-    % dark_mode, % uncomment for dark mode
+    dark_mode, % uncomment for dark mode
     fontsize= 12pt,
     a4paper,
     aspectratio=169,
@@ -15,57 +15,9 @@
     % shell_escape = false, % Kompatibilität mit sharelatex
 ]{algoslides}
 
-%%------------%%
-%%--Packages--%%
-%%------------%%
-
-% \usepackage{audutils}
-% \usepackage{fopbot}
-\usepackage{booktabs}
-\usepackage{tipa}
-
-
-%%----------------------------%%
-%%--Stilistische Anpassungen--%%
-%%----------------------------%%
-
-
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-% Remove unwanted space from tables
-\aboverulesep = 0mm \belowrulesep = 0mm
-\renewcommand{\arraystretch}{1.4}
-
-%%---------------------------%%
-%%--Dokumenteneinstellungen--%%
-%%---------------------------%%
-
-% Workshop-Individuelle Einstellungen
-\def\workshoptitle{\LaTeX}
-\def\shortworkshoptitle{\LaTeX}
-\subtitle{Einsteiger Workshop}
-\def\gruesswoerte{Gude}
-\author{Ruben Deisenroth}
-\titlegraphic*{\includegraphics{LaTeX-Wallpaper.png}}
-
-
-% Ophase-Einstellungen
-\ExplSyntaxOn
-\def\summerophasename{Sommerophase}
-\def\winterophasename{Winterophase}
-\DeclareDocumentCommand{\ophase}{}{
-    \int_compare:nTF {\the\month > 4}{
-        \winterophasename\space{}\the\year-\the\numexpr\year+1\relax
-    }{
-        \summerophasename\space{}\the\year
-    }
-}
-\ExplSyntaxOff
+\usepackage{import}
+\subimport{shared}{preamble}
 \graphicspath{{pictures}}
-\title[\shortworkshoptitle{}]{\workshoptitle{}}
-\department{TU Darmstadt | Fachbereich Informatik | \ophase{} | \insertshorttitle{}}
-\date{\today}
-\logo*{\includegraphics{d120-logo.png}}
-\def\codeDir{code}
 
 %%-------------------------%%
 %%--Beginn des Dokumentes--%%
@@ -90,16 +42,19 @@
 
     \begin{frame}
         \frametitle{Das steht heute auf dem Plan}
-        \tableofcontents[subsubsectionstyle=hide]
+        \tableofcontents[hideallsubsections]
     \end{frame}
 
 
     %%-----------%%
     %%--Kapitel--%%
     %%-----------%%
-
-    \input{chapters/chapter01}
-    \input{chapters/chapter02}
-    \input{chapters/chapter03}
-    \input{chapters/chapter04}
+    \foreach \chapter in {
+        chapters/chapter01,
+        chapters/chapter02,
+        chapters/chapter03,
+        chapters/chapter04,
+    }{
+        \input{\chapter}
+    }
 \end{document}
