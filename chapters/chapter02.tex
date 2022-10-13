@@ -96,8 +96,8 @@
                         xmax=10,
                         ymin=0,
                         ymax=4,
-                        xlabel={Aufwand},
-                        ylabel={Komplexität des Dokuments},
+                        xlabel={Komplexität des Dokuments},
+                        ylabel={Aufwand},
                         legend style={
                             mylegend,
                             % at={(0.18,0.71)},
@@ -105,21 +105,21 @@
                         },
                         ticks=none,
                     ]
-                    \addplot[samples=100,smooth, teal,thick] coordinates {
+                    \addplot[samples=100,smooth, TUDa-3a,thick] coordinates {
                         (0,0.4)
                         (.5,2)
                         (2,2.3)
                         (5,2.5)
                         (10,2.8)
                     };
-                    \addlegendentry{Word};
-                    \addplot[samples=100,smooth, orange,thick] coordinates {
+                    \addlegendentry{\LaTeX};
+                    \addplot[samples=100,smooth, TUDa-8a,thick] coordinates {
                         (0,0.2)
                         (2,.5)
                         (4,2.5)
                         (8,8.6)
                     };
-                    \addlegendentry{\LaTeX};
+                    \addlegendentry{Word};
                 \end{axis}
             \end{tikzpicture}
             \caption{Dokumentenkomplexität \LaTeX vs Word}%

@@ -176,6 +176,314 @@
         \end{columns}
     \end{frame}
 
+    \subsection{Kompilieren}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \begin{figure}
+            \centering
+            % three nodes: source -> compile -> output
+            \tikzset{
+                graphnode/.style={draw, rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text width=2cm, align=center, fill=#1,font=\color{white}},
+            }
+            \begin{tikzpicture}[start chain=1 going right, every on chain/.style={join=by -Latex}, thick]
+                \node<1->[graphnode=TUDa-1b, on chain=1] (source) {Quelldatei};
+                \node<3->[graphnode=TUDa-8b, on chain=1] (compile) {Kompilieren};
+                \node<5->[graphnode=TUDa-3b, on chain=1] (output) {Ausgabe};
+
+                \node<2->[above=0cm of source]{*.tex};
+                \node<4->[above=0cm of compile]{latexmk <datei.tex>};
+                \node<6->[above=0cm of output]{*.pdf/*.dvi/*.ps};
+            \end{tikzpicture}
+            \caption{Kompilieren mit \LaTeX}
+        \end{figure}
+        \begin{itemize}
+            \item<7-> In der Praxis klickt man meistens auf einen Button in der IDE
+            \item<8-> \verb+latexmk+ ist ein Wrapper, der die Kompilierung automatisiert
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Arbeiten mit Text}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{2em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Zeilenumbrüche}
+            }
+            Das ist ein Zeilen-\\umbruch. Er beginnt eine neue Zeile.
+
+            Das ist ein Zeilen-\linebreak umbruch. Er beginnt eine neue Zeile.
+
+            Und hier beginnt ein neuer Absatz.
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{2em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Zeilenumbrüche}
+            }
+            \setlength{\parindent}{0em}
+            Das ist ein Zeilen-\\umbruch. Er beginnt eine neue Zeile.
+
+            Das ist ein Zeilen-\linebreak umbruch. Er beginnt eine neue Zeile.
+
+            Und hier beginnt ein neuer Absatz.
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        Seitenumbrüche:
+        \begin{itemize}
+            \item \verb+\clearpage+ oder \verb+\cleardoublepage+
+            \item \verb+\newpage+ oder \verb+\newdoublepage+
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{0em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Trennhilfen}
+            }
+            Das längste Deutsche Wort lautet nunmal Rindfleischetikettierungs%
+            überwachungsaufgabenübertragungsgesetz.
+
+            Das längste Deutsche Wort lautet nunmal Rindfleisch\-etikettierungs%
+            überwachungs\-auf\-gaben%
+            \-übertragungs\-gesetz.
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{0em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Geschützte Leerzeichen}
+            }
+            Ich möchte dass diese
+            \enquote{zwei Wörter}
+            nicht getrennt werden.
+
+            Ich möchte dass diese
+            \enquote{zwei~Wörter}
+            nicht getrennt werden.
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Textarten}
+            }
+            \textbf{Fetter Text}\\
+            \textit{Kursiver Text}\\
+            \texttt{Monospaced Text}\\
+            \textsc{Kapitälchen}\\
+            \textsf{Sans Serif}\\
+            \textsl{Schräg}\\
+            \textup{Normal}\\
+            \textmd{Medium}\\
+            \textbf{\textit{Fetter Kursiver Text}}
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        %\slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Schriftgrößen}
+            }
+            \tiny{Klein}\\
+            \scriptsize{Klein}\\
+            \footnotesize{Klein}\\
+            \small{Klein}\\
+            \normalsize{Normal}\\
+            \large{Groß}\\
+            \Large{Groß}\\
+            \LARGE{Groß}\\
+            \huge{Groß}\\
+            \Huge{Groß}
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{0em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Platz machen}
+            }
+            Zeile 1
+
+            Zeile 2
+
+            \vspace{1cm}
+            Zeile 3\hspace{1cm}Hat Platz
+
+            \vspace{-4mm}
+            Zeile 4 ist zu nah an Zeile 3
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            righthand width=4.5cm,
+            %center lower,
+            fontlower=\setlength{\parskip}{\medskipamount}\setlength{\parindent}{0em},
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Farben}
+            }
+            \textcolor{red}{Rot}\\
+            \textcolor{green}{Grün}\\
+            \textcolor{blue!50!red}{Mischung}\\
+            \textcolor{blue!50!red!50}{Mischung}
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+
+    \subsection{Titelei}
+    \begin{frame}[c, fragile]
+        %\slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Titelei},
+                }{\codeDir/sharelatex-template.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/sharelatex-template}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        %\slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={4-6}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Titelei},
+                }{\codeDir/sharelatex-template.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/sharelatex-template}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        %\slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={10}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Titelei},
+                }{\codeDir/sharelatex-template.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/sharelatex-template}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        %\slidehead{}
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \inputCode[highlightlines={12}]{
+                    minted language=latex,
+                    title=\codeBlockTitle{Titelei},
+                }{\codeDir/sharelatex-template.tex}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \centering
+                \colorbox{white}{%
+                    \color{black}
+                    \includegraphics[width=\textwidth,height=5cm,keepaspectratio]{\codeDir/sharelatex-template}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
     \subsection{Sharelatex-Instanz}\label{2.2}\label{2.2}
     % \begin{frame}[c]
     %     \slidehead{}
