@@ -1,0 +1,156 @@
+\documentclass[
+    inlineshortcut=java, % Befehl \inlinejava{<code>} Konfigurieren
+    corporatedesign, % TU-Design
+    boxarc, % Abgerundete Ecken bei den Boxen
+    %titleprefix={LaTeX-Workshop}, % FOP-Vorlage benutzen
+    % dark_mode,
+]{algoexercise}
+
+%%------------%%
+%%--Packages--%%
+%%------------%%
+
+% \usepackage{audutils}
+\usepackage{fopbot}
+\usepackage{menukeys}
+\usepackage{booktabs}
+
+%%---------------------------%%
+%%--Dokumenteneinstellungen--%%
+%%---------------------------%%
+
+\duedate{28.10.2022 bis 23:50 Uhr}
+\author{Ruben Deisenroth} % Übungsblattbetreuer
+\subtitle{Übungsaufgaben}
+\fachbereich{Informatik}
+\semester{Wintersemester 22/23} % z.B. SoSe 2022 oder WiSe 2022/2023
+\sheetnumber{0} % Einstellige Nummern werden mit 0 aufgefüllt
+\slides{01a} % Die Relevanten Foliensätze
+\topics{\LaTeX-Basics, Formeln, Abbildungen} % Für das Übungsblatt relevante Themengebiete
+\title[Java-Einstieg mit FopBot]{LaTeX-Workshop}
+\version{1.0-SNAPSHOT}
+\date{\today}
+\graphicspath{{./pictures/}}
+
+%%----------------------------%%
+%%--Stilistische Anpassungen--%%
+%%----------------------------%%
+
+\ExplSyntaxOn
+% Author
+\renewcommand*{\author}[1]{
+    \seq_gset_split:Nnn \g_ptxcd_author_seq {\and} {#1}
+    \seq_if_empty:NF \g_ptxcd_author_seq {\tl_gset:Nn \printAuthor {\int_compare:nTF{\seq_count:N \g_ptxcd_author_seq >
+                1}{Autoren}{Autor}:~\hfill\seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\authorandname{}~}\par}}
+}
+\termLeft{}
+\termRight{}
+\term{
+    Author: \getAuthor{}\hfill{}\printDate{}\\
+    \printTopics{}
+    % \printSlides{}\\
+    % \printDuedate{}
+}
+\ExplSyntaxOff
+
+\ConfigureHeadline{
+    headline={algo-min}
+}
+
+\IfDarkModeT{
+    \colorlet{fopbot@lightgray}{black!80!gray!98!blue}
+    \colorlet{fopbot@dark_gray}{white!20!gray!98!blue}
+    \colorlet{fopbot@coin}{orange!90}
+}
+
+%%-------------------------%%
+%%--Beginn des Dokumentes--%%
+%%-------------------------%%
+
+\begin{document}%
+
+    %%-----------%%
+    %%--Titelei--%%
+    %%-----------%%
+
+    \maketitle{}
+    \vspace{-1em}
+    \hue{Übungsaufgaben zum \LaTeX-Workshop}{Aller Anfang ist schwer...}{\getPointsTotal{}}
+
+    %\tableofcontents
+
+    %%------------------------------%%
+    %%--Verbindliche Anforderungen--%%
+    %%------------------------------%%
+
+    %\UseSnippet{exercise-introduction-fop-2223}
+
+    %%--------------%%
+    %%--Einleitung--%%
+    %%--------------%%
+    % \section*{Einleitung}
+    % Im Laufe des Semesters werden Sie jede Woche eine Programmierübung bearbeiten und abgeben, um die Studienleistung und ggf. den Klausurbonus zu erreichen. Insgesamt gibt es 13 Übungsblätter und ein FOP-Projekt. Die Übungsblätter sind Einzelabgaben, das FOP-Projekt ist eine Gruppenabgabe mit größerem Umfang und wird voraussichtlich in vierer-Gruppen Abzugeben sein. \href{https://moodle.informatik.tu-darmstadt.de/mod/page/view.php?id=49970#studienleistung}{Informationen zu Studienleistung und zum Klausurbonus finden Sie im Moodle-Kurs.}
+
+    % Ende der Titelseite
+    % \clearpage{}
+
+    %%------------------------%%
+    %%--Beginn der Hausübung--%%
+    %%------------------------%%
+
+    \begin{task}[points=auto]{\LaTeX-Basics}
+        \begin{subtask*}[points=2]{Hello World}
+            \begin{enumerate}
+                \item Erstellen Sie ein minimales Textdokument mit Klasse \texttt{article} und \texttt{a4paper} mit dem Text \verb+Hello World+.
+                \item Erstellen Sie eim Textdokument mit 2 seiten Blindtext.
+            \end{enumerate}
+        \end{subtask*}
+        \vspace{-2em}
+        \begin{subtask*}[points=1]{Textarten}
+            Tippen Sie den folgenden Text ein:
+
+            \begin{grayInfoBox}
+                \Large Das \emph{Einzige}, \large was wir \enquote{\textbf{wissen}}, ist, \normalsize dass wir \textcolor{\IfDarkModeTF{cyan}{blue}}{nichts} \fatsf{wissen}. \small Und das ist \texttt{wichtig}.
+            \end{grayInfoBox}
+        \end{subtask*}
+        \begin{subtask*}[points=1]{Zeilenumbrüche}
+            Tippen sie eine Art \enquote{Tic-Tac-Toe}:
+
+            \begin{grayInfoBox}[fontupper=\setlength{\parskip}{0cm}\setlength{\parindent}{0em}, center upper]
+                \textcolor{red}{X}\hspace{1cm}O\hspace{1cm}X
+
+                \vspace{1cm}O\hspace{1cm}\textcolor{red}{X}\hspace{1cm}O
+
+                \vspace{1cm}X\hspace{1cm}O\hspace{1cm}\textcolor{red}{X}
+            \end{grayInfoBox}
+        \end{subtask*}
+        \begin{subtask*}[points=1]{Trennhilfe}
+            Bin gerade zu unkreativ um mir nen text auszudenken, also bischen selber basteln\^{}\^{}
+        \end{subtask*}
+    \end{task}
+    \clearpage{}
+    \begin{task}[points=auto]{Mathematische Formeln}
+        \begin{subtask*}[points=3]{Binomische Formeln}
+            Tippen Sie die folgenden binomischen Formeln ein:
+            \begin{grayInfoBox}
+                \begin{align}
+                    (a+b)^2    & = a^2 + 2ab + b^2 \\
+                    (a-b)^2    & = a^2 - 2ab + b^2 \\
+                    (a+b)(a-b) & = a^2 - b^2
+                \end{align}
+            \end{grayInfoBox}
+        \end{subtask*}
+        \begin{subtask*}[points=1]{mitternachtsformel}
+            Tippen Sie die folgende Formel ein:
+            \begin{grayInfoBox}
+                \fatsf{Mitternachtsformel}
+                Für eine Polynom zweiten Grades in der Form $a\cdot x^2+b\cdot x + c$ gilt für $a,b,c \in \mathbb{R}$ immer:%
+
+                \begin{align}
+                    x_{1/2} & =\frac{-b\pm\sqrt{b^{2}-4\cdot a \cdot c}}{2\cdot a}
+                \end{align}
+
+            \end{grayInfoBox}
+        \end{subtask*}
+    \end{task}
+\end{document}
