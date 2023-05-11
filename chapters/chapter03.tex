@@ -1,3 +1,4 @@
+% !TeX root = ../main.tex
 \documentclass[
     ngerman,
     accentcolor=3b,
@@ -484,20 +485,39 @@
         \end{columns}
     \end{frame}
 
-    \subsection{Coder+Sharelatex-Instanz}
-    \urlslide[Coder-Instanz für die O-Fahrt(lokal, schnell)]{https://coder.ofahrt-d120.de}
-    \urlslide[Sharelatex-Instanz der TU-Darmstadt(langsam)]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
+    \subsection{Mit \LaTeX arbeiten}
+    \urlslide[Sharelatex-Instanz der TU-Darmstadt(langsam, nicht empfohlen)]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
+    \urlslide[Coder-Instanz der Tudalgo(schneller, empfohlen falls nicht lokal installiert)]{https://coder.tudalgo.org}
+    \begin{frame}[c,fragile]
+        \slidehead{}
+        \fatsf{Docker-Image}
+        \verb+ghcr.io/tudalgo/algotex:latest+
+        \begin{itemize}
+            \item Makefile: \verb+make DOCKER=true+ (siehe Beispielprojekt)
+            \item Vscode Devcontainer: \verb+Remote-Containers: Reopen in Container+ (siehe Beispielprojekt)
+            \item manuell: \verb+docker run -it --rm -v $(pwd):/project -w /project ghcr.io/tudalgo/algotex:latest latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex folien.tex+ (ggf. mehr flags)
+        \end{itemize}
+    \end{frame}
+    \begin{frame}[c,fragile]
+        \slidehead{}
+        \fatsf{Manuell}
+        \begin{itemize}
+            \item TeX-Live full installieren
+            \item TU-Logo installieren
+            \item AlgoTeX installieren
+        \end{itemize}
+    \end{frame}
     \subsection{Übungsphase}
     \begin{frame}[c]
         \slidehead{}
         \centering
-        15 Minuten Übungsphase
+        5 Minuten Übungsphase
         \begin{columns}[c]
             \begin{column}{.5\textwidth}
                 \begin{figure}
                     \centering
                     \qrcode[height=3cm]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
-                    \caption{Coder-Instanz für die O-Fahrt\\\url{https://coder.ofahrt-d120.de}}
+                    \caption{Coder-Instanz der Tudalgo\\\url{https://coder.tudalgo.org}}
                 \end{figure}
             \end{column}%
             \begin{column}{.5\textwidth}
