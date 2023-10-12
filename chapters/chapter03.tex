@@ -1,3 +1,4 @@
+% !TeX root = ../main.tex
 \documentclass[
     ngerman,
     accentcolor=3b,
@@ -484,26 +485,47 @@
         \end{columns}
     \end{frame}
 
-    \subsection{Sharelatex-Instanz}
-    \urlslide[Sharelatex-Instanz der TU-Darmstadt]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
+    \subsection{Mit \LaTeX arbeiten}
+    \urlslide[Sharelatex-Instanz der TU-Darmstadt(langsam, nicht empfohlen)]{https://sharelatex.ca.hrz.tu-darmstadt.de}
+    \urlslide[Coder-Instanz der Tudalgo(schneller, empfohlen falls nicht lokal installiert)]{https://coder-ophase.ruben-deisenroth.de}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \fatsf{Docker-Image}
+
+        \verb+ghcr.io/tudalgo/algotex:latest+
+        \begin{itemize}
+            \item Makefile: \verb+make DOCKER=true+ (siehe Beispielprojekt)
+            \item Vscode Devcontainer: \verb+Remote-Containers: Reopen in Container+ (siehe Beispielprojekt)
+            \item manuell: \verb+docker run -it --rm -v $(pwd):/project -w /project ghcr.io/tudalgo/algotex:latest latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex folien.tex+ (ggf. mehr flags)
+        \end{itemize}
+    \end{frame}
+    \begin{frame}[fragile]
+        \slidehead{}
+        \fatsf{Manuell}
+        \begin{itemize}
+            \item TeX-Live full installieren
+            \item TU-Logo installieren
+                % \item AlgoTeX installieren
+        \end{itemize}
+    \end{frame}
     \subsection{Übungsphase}
     \begin{frame}[c]
         \slidehead{}
         \centering
-        15 Minuten Übungsphase
+        5 Minuten Übungsphase
         \begin{columns}[c]
             \begin{column}{.5\textwidth}
                 \begin{figure}
                     \centering
-                    \qrcode[height=3cm]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
-                    \caption{Sharelatex-Instanz der TU-Darmstadt\\\url{https://sharelatex01.ca.hrz.tu-darmstadt.de}}
+                    \qrcode[height=3cm]{https://coder-ophase.ruben-deisenroth.de}
+                    \caption{Coder-Instanz\\\url{https://coder-ophase.ruben-deisenroth.de}}
                 \end{figure}
             \end{column}%
             \begin{column}{.5\textwidth}
                 \begin{figure}
                     \centering
-                    \qrcode[height=3cm]{https://github.com/ophase-2022-23/LaTeX-Workshop/releases/latest}
-                    \caption{Link zu Folien + Übungen\\\url{https://github.com/ophase-2022-23/LaTeX-Workshop/releases/latest}}
+                    \qrcode[height=3cm]{https://github.com/Rdeisenroth/LaTeX-Workshop/releases/latest}
+                    \caption{Link zu Folien + Übungen\\\url{https://github.com/Rdeisenroth/LaTeX-Workshop/releases/latest}}
                 \end{figure}
             \end{column}
         \end{columns}

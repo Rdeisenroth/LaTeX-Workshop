@@ -1,6 +1,6 @@
 # Workshop-Folien
 
-Das Template-Repo für die Workshop-Folien der Ofahrt 2022.
+Die Materialien meines LaTeX-Workshops für die Fachschaft Informatik der TU Darmstadt.
 ## Voraussetzungen
 - Latex-Installation (z.B. MikTex oder TexLive)
 - Installation der [TU-Template](https://github.com/tudace/tuda_latex_templates) und der verwendeten Plugins

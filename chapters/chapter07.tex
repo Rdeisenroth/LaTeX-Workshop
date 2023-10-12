@@ -1,0 +1,426 @@
+% !TeX root = ../main.tex
+\documentclass[
+    ngerman,
+    accentcolor=3b,
+    dark_mode,
+    fontsize= 12pt,
+    a4paper,
+    aspectratio=169,
+    colorback=true,
+    fancy_row_colors,
+    leqno,
+    fleqn,
+    boxarc=3pt,
+    fleqn,
+    % shell_escape = false, % Kompatibilität mit sharelatex
+]{algoslides}
+
+%%--------------------------%%
+%%--Imports from Main File--%%
+%%--------------------------%%
+\usepackage{import}
+% Import all Packages from Main Preamble with relative Path (buggy, list packages instead)
+\subimport*{../shared}{preamble}
+% Get Labels from Main Document using the xr-hyper Package
+\externaldocument[ext:]{../main}
+% Set Graphics Path, so pictures load correctly
+\graphicspath{{../pictures}}
+\def\codeDir{../code}
+
+\begin{document}
+    \section{AlgoTeX}\label{AlgoTeX}
+    \subsection{Tasks und Subtasks}
+    \begin{frame}[fragile,c]
+        \slidehead{}
+        \vspace{-1.8em}
+        \begin{codeBlock}[fontsize=\footnotesize]{minted language=latex, title=\codeBlockTitle{Beispielschema für Tasks und Subtasks},top=0cm,bottom=0cm}
+        %--------------%
+        %--Aufgabe H1--%
+        %--------------%
+        \begin{task}[points=<n>]{<Aufgabentitel>}\label{ex:H1} % Aufgabe ohne Subtasks
+            <Aufgabenstellung>
+        \end{task}
+        %--------------%
+        %--Aufgabe H2--%
+        %--------------%
+        \begin{task}[points=auto]{<Aufgabentitel>}\label{ex:H2} % Aufgabe mit Subtasks
+            <Einleitung>
+            % Aufgabe H2.1
+            \begin{subtask*}[points=<n2>]{<Aufgabentitel>}\label{ex:H2.1}
+                <Aufgabenstellung Teilaufgabe 1>
+            \end{subtask*}
+        \end{task}
+    \end{codeBlock}
+    \end{frame}
+    \subsection{Boxen}
+    \begin{frame}
+        \slidehead{}
+        \begin{columns}[c]
+            \begin{column}[t]{\textwidth/3}
+                \begin{defBox}
+                    Das ist eine defBox
+                \end{defBox}
+                \begin{itemize}
+                    \item sehr wichtige Informationen
+                    \item z.B. verbindliche Anforderungen
+                \end{itemize}
+            \end{column}%
+            \begin{column}[t]{\textwidth/3}
+                \begin{infoBox}
+                    Das ist eine infoBox
+                \end{infoBox}
+                \begin{itemize}
+                    \item direkt die Übung betreffende informationen
+                    \item nicht ganz so wichtig wie in der defBox
+                    \item z.B. Hinweise/Beispiele
+                \end{itemize}
+            \end{column}%
+            \begin{column}[t]{\textwidth/3}
+                \begin{grayInfoBox}
+                    Das ist eine grayInfoBox
+                \end{grayInfoBox}
+                \begin{itemize}
+                    \item Informationen, die nicht relevant für die Übung sind
+                    \item z.B. Hintergrundinformationen
+                \end{itemize}
+            \end{column}%
+        \end{columns}
+    \end{frame}
+    \begin{frame}[c,fragile,allowframebreaks]
+        % \begin{noindent}
+        \begin{table}[ht!] \centering
+            \rowcolors{2}{\thepagecolor}{fgcolor!10!\thepagecolor}
+            \renewcommand{\arraystretch}{1}
+            Übersicht vordefinierter Box-Environments
+            \begin{longtable}{cccp{5cm}}
+                \toprule
+                \fatsf{Name} & \fatsf{Boxart} & \fatsf{default-Specifier}                                & \fatsf{Titel}                            \\
+                \midrule
+                \ExplSyntaxOn
+                \seq_map_inline:Nn \rubos_color_box_environment_seq {
+                    \bool_gset_true:N \rubos_color_box_environment_first_param_bool
+                    \seq_map_inline:Nn {#1} {
+                        \bool_if:NTF \rubos_color_box_environment_first_param_bool {
+                            \bool_gset_false:N \rubos_color_box_environment_first_param_bool
+                        } {
+                            &
+                        }
+                        \tl_if_empty:nTF {##1} {\{\}} {##1}
+                    }
+                    \\
+                }
+                \ExplSyntaxOff%
+                \\[-.5cm]\bottomrule
+            \end{longtable}
+        \end{table}
+        % \end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{codeBlock}[
+            % highlightlines={7}
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Beispiel für Boxen},
+            }
+            \begin{vanforderung}[Für H2.2]
+                es darf keine Rekursion verwendet werden.
+            \end{vanforderung}
+        \end{codeBlock}
+        %\end{noindent}
+    \end{frame}
+    \subsection{Code-Böcke}
+    \let\newcb\codeBlock
+    \let\endnewcb\endcodeBlock
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel},
+            }
+            \begin{codeBlock}[fontsize=\scriptsize]{
+                minted language=java,
+                title=\codeBlockTitle{Fibonacci},
+            }
+                public static int fibRec(int n) {
+                    return n < 2 ? n : fibRec(n - 1) + fibRec(n - 2);
+                }
+            \end{codeBlock}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \LaTeX-Code innerhalb eines Code-Blocks:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \begin{codeBlock}[
+                fontsize=\scriptsize,
+                escapeinside=@@
+            ]{
+                minted language=java,
+                title=\codeBlockTitle{SomeFormula},
+            }
+                return @\alpha@ + @\beta@;
+            \end{codeBlock}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        Auch Inline möglich:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            Schreiben Sie eine \inlinejava{public}-Klassenmethode \inlinejava{fibRec(int n)}, die die $n$-te Fibonacci-Zahl rekursiv berechnet.
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \subsection{Javadoc + Referenzen}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        Referenzen
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \label{lst:java:example}
+            \begin{codeBlock}[fontsize=\scriptsize]{
+            }
+                System.out.println("Hello World");
+            \end{codeBlock}
+
+            Wie in \ref{lst:java:example} zu sehen, wird \inlinejava{\"Hello World\"} ausgegeben.
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        Referenzen (besser)
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \label{fig:example}
+            \begin{codeBlock}[fontsize=\scriptsize]{
+            }
+                System.out.println("Hello World");
+            \end{codeBlock}
+
+            Wie in \figurename{}~\ref{fig:example} zu sehen, wird \inlinejava{\"Hello World\"} ausgegeben.
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        Referenzen (gut)
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \label{fig:example}
+            \begin{codeBlock}[fontsize=\scriptsize]{
+            }
+                System.out.println("Hello World");
+            \end{codeBlock}
+
+            Wie im \hyperref[fig:example]{Code-Beispiel} zu sehen, wird \inlinejava{\"Hello World\"} ausgegeben.
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \verb+\refJavaDoc{}+:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \begin{grayInfoBox}
+                \refJavaDoc{java.util.ArrayList}
+            \end{grayInfoBox}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \verb+\refJavaDoc{}+ spezifische Methode:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \begin{grayInfoBox}
+                \refJavaDoc[jdk=11, ref={add(int,E)}]{java.util.ArrayList}
+            \end{grayInfoBox}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \verb+\refJavaDoc{}+ spezifische Methode:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \begin{grayInfoBox}
+                \refJavaDoc[jdk=17, title=Methode \inlinejava{size} von \inlinejava{ArrayList}, ref=size()]{java.util.ArrayList}
+            \end{grayInfoBox}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \begin{frame}[c, fragile]
+        \slidehead{}
+        \verb+\refJavaDoc{}+ und \verb+\refJavaDoc*{}+:
+        %\begin{noindent}
+        \begin{newcb}[
+            % highlightlines={7}
+            fontsize=\scriptsize,
+            escapeinside=||,
+            ]{
+            minted language=latex,
+            listing and text,
+            sidebyside,
+            %righthand width=4.9cm,
+            %center lower,
+            bicolor,
+            colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+            title=\codeBlockTitle{Code-Block Beispiel2},
+            }
+            \begin{grayInfoBox}
+                \textbf{\emph{Fehlermeldungen besser verstehen}:}
+                Was passiert, wenn Sie den generischen Typparameter \inlinejava{T} bei einer dieser Klassen versuchsweise mit
+                \refJavaDoc*{java.lang.String} oder \refJavaDoc*{java.lang.Object} instantiieren?
+            \end{grayInfoBox}
+        \end{newcb}
+        %\end{noindent}
+    \end{frame}
+    \subsection{Übungsphase}
+    \begin{frame}[c]
+        \slidehead{}
+        \centering
+        5 Minuten Übungsphase
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \begin{figure}
+                    \centering
+                    \qrcode[height=3cm]{https://coder-ophase.ruben-deisenroth.de}
+                    \caption{Coder-Instanz\\\url{https://coder-ophase.ruben-deisenroth.de}}
+                \end{figure}
+            \end{column}%
+            \begin{column}{.5\textwidth}
+                \begin{figure}
+                    \centering
+                    \qrcode[height=3cm]{https://github.com/Rdeisenroth/LaTeX-Workshop/releases/latest}
+                    \caption{Link zu Folien + Übungen\\\url{https://github.com/Rdeisenroth/LaTeX-Workshop/releases/latest}}
+                \end{figure}
+            \end{column}
+        \end{columns}
+    \end{frame}
+\end{document}
