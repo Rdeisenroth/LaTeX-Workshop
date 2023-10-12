@@ -14,21 +14,30 @@
 \usepackage{fopbot}
 \usepackage{menukeys}
 \usepackage{booktabs}
+\usepackage{placeins}
+
+\ExplSyntaxOn
+\def\summerOrWinter{Winter}
+\bool_if:nTF {\int_compare_p:n {\the\month > 4} && \int_compare_p:n {\the\month < 10}}{
+    \def\summerOrWinter{Sommer}
+}
+\def\ophase{\summerOrWinter{}ophase}
+\ExplSyntaxOff
 
 %%---------------------------%%
 %%--Dokumenteneinstellungen--%%
 %%---------------------------%%
 
 \duedate{28.10.2022 bis 23:50 Uhr}
-\author{Ruben Deisenroth} % Übungsblattbetreuer
 \subtitle{Übungsaufgaben}
 \fachbereich{Informatik}
-\semester{Sommersemester 2023} % z.B. SoSe 2022 oder WiSe 2022/2023
+\dozent{Ruben Deisenroth}
+\semester{\summerOrWinter{}semester \the\year} % z.B. SoSe 2022 oder WiSe 2022/2023
 \sheetnumber{0} % Einstellige Nummern werden mit 0 aufgefüllt
 \slides{01a} % Die Relevanten Foliensätze
 \topics{\LaTeX-Basics, Formeln, Abbildungen} % Für das Übungsblatt relevante Themengebiete
 \title[LaTeX-Workshop]{LaTeX-Workshop}
-\version{1.0-SNAPSHOT}
+\version{1.0}
 \date{\today}
 \graphicspath{{./pictures/}}
 
@@ -37,21 +46,17 @@
 %%----------------------------%%
 
 \ExplSyntaxOn
-% Author
-\renewcommand*{\author}[1]{
-    \seq_gset_split:Nnn \g_ptxcd_author_seq {\and} {#1}
-    \seq_if_empty:NF \g_ptxcd_author_seq {\tl_gset:Nn \printAuthor {\int_compare:nTF{\seq_count:N \g_ptxcd_author_seq >
-                1}{Autoren}{Autor}:~\hfill\seq_use:Nnnn \g_ptxcd_author_seq {~\authorandname{}~} {,~} {~\authorandname{}~}\par}}
-}
 \termLeft{}
 \termRight{}
 \term{
-    Author: \getAuthor{}\hfill{}\printDate{}\\
+    Author:~\fatsf{\getAuthor{}}\hfill{}\printDate{}\\
     \printTopics{}
     % \printSlides{}\\
     % \printDuedate{}
 }
 \ExplSyntaxOff
+
+\author{Ruben Deisenroth} % Übungsblattbetreuer
 
 \ConfigureHeadline{
     headline={algo-min}
@@ -89,7 +94,6 @@
     %%--Einleitung--%%
     %%--------------%%
     % \section*{Einleitung}
-    % Im Laufe des Semesters werden Sie jede Woche eine Programmierübung bearbeiten und abgeben, um die Studienleistung und ggf. den Klausurbonus zu erreichen. Insgesamt gibt es 13 Übungsblätter und ein FOP-Projekt. Die Übungsblätter sind Einzelabgaben, das FOP-Projekt ist eine Gruppenabgabe mit größerem Umfang und wird voraussichtlich in vierer-Gruppen Abzugeben sein. \href{https://moodle.informatik.tu-darmstadt.de/mod/page/view.php?id=49970#studienleistung}{Informationen zu Studienleistung und zum Klausurbonus finden Sie im Moodle-Kurs.}
 
     % Ende der Titelseite
     % \clearpage{}
@@ -114,7 +118,7 @@
             \end{grayInfoBox}
         \end{subtask*}
         \begin{subtask*}[points=1]{Zeilenumbrüche}
-            Tippen sie eine Art \enquote{Tic-Tac-Toe}:
+            Tippen Sie eine Art \enquote{Tic-Tac-Toe}:
 
             \begin{grayInfoBox}[fontupper=\setlength{\parskip}{0cm}\setlength{\parindent}{0em}, center upper]
                 \textcolor{red}{X}\hspace{1cm}O\hspace{1cm}X
@@ -123,12 +127,65 @@
 
                 \vspace{1cm}X\hspace{1cm}O\hspace{1cm}\textcolor{red}{X}
             \end{grayInfoBox}
+
+            \begin{hinweise}
+                \begin{itemize}
+                    \item Die Box ist nur zur Veranschaulichung da. Sie müssen nur den Text tippen.
+                    \item Sie können \verb+\vspace{<länge>}+ und \verb+\hspace{<länge>}+ nutzen, um die Abstände zu setzen.
+                \end{itemize}
+            \end{hinweise}
         \end{subtask*}
+        \clearpage{}
         \begin{subtask*}[points=1]{Trennhilfe}
-            Bin gerade zu unkreativ um mir nen text auszudenken, also bischen selber basteln\^{}\^{}
+            % Hier bitte selbst ein Beispiel ausdenken. Es kann ja nicht angehen, dass dieser Text einfach ungetrennt bleibt. Da\-bei könnt ihr das doch selbstverständlich!\^{}\^{}
+            Fügen Sie für die folgenden Wörter Trennhilfen ein:
+            \begin{itemize}
+                \item Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz
+                \item Grundstücksverkehrsgenehmigungszuständigkeitsübertragungsverordnung
+            \end{itemize}
+            Das sieht dann in etwa so aus:
+            \begin{figure}[ht!]
+                \centering
+                \begin{subfigure}[t]{.5\textwidth}
+                    \centering
+                    \begin{tcolorbox}[width=3cm]
+                        Rind\-flei\-sche\-ti\-ket\-tie\-rungs\-über\-wa\-chungs\-auf\-ga\-ben\-über\-tra\-gungs\-ge\-setz
+                    \end{tcolorbox}
+                \end{subfigure}%
+                \begin{subfigure}[t]{.5\textwidth}
+                    \centering
+                    \begin{tcolorbox}[width=3cm]
+                        Grund\-stücks\-ver\-kehrs\-ge\-neh\-mi\-gungs\-zu\-stän\-dig\-keits\-über\-tra\-gungs\-ver\-ord\-nung
+                    \end{tcolorbox}
+                \end{subfigure}
+                \caption{Beispiel für Trennhilfen, jeweils mit 3cm breiter Tcolorbox dargestellt}
+                \label{fig:example-hyphenation}
+            \end{figure}
+            \FloatBarrier
+            Sie können ihr Ergebnis ebenfalls in einer Tcolorbox testen:
+            \begin{codeBlock}[
+                % highlightlines={7}
+                escapeinside=||,
+                ]{
+                minted language=latex,
+                listing and text,
+                sidebyside,
+                %righthand width=4.1cm,
+                %center lower,
+                bicolor,
+                colbacklower=\IfDarkModeTF{codebg!90}{codebg!20},
+                title=\codeBlockTitle{tcolorbox Beispiel},
+                top=0pt,
+                bottom=0pt,
+                }
+                % needs package tcolorbox
+                \begin{tcolorbox}[width=3cm]
+                    <Ihr Text>
+                \end{tcolorbox}
+            \end{codeBlock}
         \end{subtask*}
     \end{task}
-    \clearpage{}
+    % \clearpage{}
     \begin{task}[points=auto]{Mathematische Formeln}
         \begin{subtask*}[points=3]{Binomische Formeln}
             Tippen Sie die folgenden binomischen Formeln ein:

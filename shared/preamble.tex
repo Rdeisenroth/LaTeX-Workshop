@@ -41,18 +41,14 @@
 
 % Ophase-Einstellungen
 \ExplSyntaxOn
-\def\summerophasename{Sommerophase}
-\def\winterophasename{Winterophase}
-\DeclareDocumentCommand{\ophase}{}{
-    \int_compare:nTF {\the\month > 4}{
-        \winterophasename\space{}\the\year-\the\numexpr\year+1\relax
-    }{
-        \summerophasename\space{}\the\year
-    }
+\def\summerOrWinter{Winter}
+\bool_if:nTF {\int_compare_p:n {\the\month > 4} && \int_compare_p:n {\the\month < 10}}{
+    \def\summerOrWinter{Sommer}
 }
+\def\ophase{\summerOrWinter{}ophase}
 \ExplSyntaxOff
 \title[\shortworkshoptitle{}]{\workshoptitle{}}
-\department{TU Darmstadt | Fachbereich Informatik | FOP-Vorbereitung Workshops | \insertshorttitle{}}
+\department{TU Darmstadt | FB20 | \ophase{}\space{}\the\year{} | \insertshorttitle{}-Workshop}
 \date{\today}
 \logo*{\includegraphics{d120-logo.png}}
 \def\codeDir{code}

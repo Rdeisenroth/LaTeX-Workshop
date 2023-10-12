@@ -486,11 +486,12 @@
     \end{frame}
 
     \subsection{Mit \LaTeX arbeiten}
-    \urlslide[Sharelatex-Instanz der TU-Darmstadt(langsam, nicht empfohlen)]{https://sharelatex01.ca.hrz.tu-darmstadt.de}
-    \urlslide[Coder-Instanz der Tudalgo(schneller, empfohlen falls nicht lokal installiert)]{https://coder.tudalgo.org}
-    \begin{frame}[c,fragile]
+    \urlslide[Sharelatex-Instanz der TU-Darmstadt(langsam, nicht empfohlen)]{https://sharelatex.ca.hrz.tu-darmstadt.de}
+    \urlslide[Coder-Instanz der Tudalgo(schneller, empfohlen falls nicht lokal installiert)]{https://coder-ophase.ruben-deisenroth.de}
+    \begin{frame}[fragile]
         \slidehead{}
         \fatsf{Docker-Image}
+
         \verb+ghcr.io/tudalgo/algotex:latest+
         \begin{itemize}
             \item Makefile: \verb+make DOCKER=true+ (siehe Beispielprojekt)
@@ -498,13 +499,13 @@
             \item manuell: \verb+docker run -it --rm -v $(pwd):/project -w /project ghcr.io/tudalgo/algotex:latest latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex folien.tex+ (ggf. mehr flags)
         \end{itemize}
     \end{frame}
-    \begin{frame}[c,fragile]
+    \begin{frame}[fragile]
         \slidehead{}
         \fatsf{Manuell}
         \begin{itemize}
             \item TeX-Live full installieren
             \item TU-Logo installieren
-            \item AlgoTeX installieren
+                % \item AlgoTeX installieren
         \end{itemize}
     \end{frame}
     \subsection{Übungsphase}
@@ -516,8 +517,8 @@
             \begin{column}{.5\textwidth}
                 \begin{figure}
                     \centering
-                    \qrcode[height=3cm]{https://coder.tudalgo.org}
-                    \caption{Coder-Instanz der Tudalgo\\\url{https://coder.tudalgo.org}}
+                    \qrcode[height=3cm]{https://coder-ophase.ruben-deisenroth.de}
+                    \caption{Coder-Instanz\\\url{https://coder-ophase.ruben-deisenroth.de}}
                 \end{figure}
             \end{column}%
             \begin{column}{.5\textwidth}

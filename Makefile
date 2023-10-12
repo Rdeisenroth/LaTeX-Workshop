@@ -1,39 +1,21 @@
 
 OUT_DIR := build/
 TOPTARGETS := clean all
-
-# recursive slides helper
-define compile_latex
-	latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex "$(1)"
-endef
+FILES := $(wildcard *.tex)
 
 define compile_latex_with_jobname_and_env
-	$(3) latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex -jobname=$(2) "$(1)"
-endef
-
-define build_latex
-	$(eval DIR := $(dir $(1)))
-	$(eval FILE := $(notdir $(1)))
-	@echo "Compiling $(FILE) in $(DIR)..."
-	@cd $(DIR) && $(call compile_latex,$(FILE))
-	@# copy PDF file to outdir
-	@mkdir -p $(OUT_DIR)
-	@mv $(basename $(1)).pdf $(OUT_DIR)/
-	@echo
+	cd $(4) && $(3) latexmk --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error -lualatex -jobname=$(2) "$(1)"
 endef
 
 define build_latex_with_jobname_and_env
 	$(eval DIR := $(dir $(1)))
 	$(eval FILE := $(notdir $(1)))
-	@echo "Compiling $(FILE) in $(DIR)..."
-	@cd $(DIR) && $(call compile_latex_with_jobname_and_env,$(FILE),$(2),$(3))
-	@# copy PDF file to outdir
+	@echo -e "\e[1;32mCompiling \"$(FILE)\" in \"$(DIR)\" with jobname \"$(2)\"$<\e[0m"
+	@$(call compile_latex_with_jobname_and_env,$(FILE),$(2),$(3),$(DIR))
+	@echo -e "\e[1;32mSuccessfully compiled \"$(FILE)\" in \"$(DIR)\" with jobname \"$(2)\"$<\e[0m"
 	@mkdir -p $(OUT_DIR)
-	@mv $(2).pdf $(OUT_DIR)/
-	@echo
+	@cp $(DIR)/$(2).pdf $(OUT_DIR)/
 endef
-
-FILES := $(wildcard *.tex)
 
 all:
 	$(MAKE) clean
@@ -48,57 +30,49 @@ $(FILES:.tex=.tex.darkmode):
 	$(eval FILE := $(patsubst %.tex.darkmode,%.tex,$@))
 	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%-darkmode,$(FILE)),DARK_MODE=1)
 
+$(FILES:.tex=.tex.highcontrast):
+	$(eval FILE := $(patsubst %.tex.highcontrast,%.tex,$@))
+	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%-high-contrast,$(notdir $(FILE))),DARK_MODE=2)
+
 compileCode:
 	@echo "Compiling code"
 	$(MAKE) -C code
 
-compile: $(FILES:.tex=.tex.regular) $(FILES:.tex=.tex.darkmode)
-	@echo "PDFs can be found in $(OUT_DIR)"
+compile: $(FILES:.tex=.tex.regular) $(FILES:.tex=.tex.darkmode) $(FILES:.tex=.tex.highcontrast)
+	@echo -e "\e[1;42mAll Done. PDFs can be found in $(OUT_DIR)\e[0m"
 
 clean:
-	@echo "Cleaning..."
+	@echo -e "\e[1;34mCleaning up leftover build files...$<\e[0m"
 	@latexmk -C -f
-	@rm -f options.cfg
-	@rm -f *.pdf
-	@rm -f *.aux
-	@rm -f *.fdb_latexmk
-	@rm -f *.fls
-	@rm -f *.len
-	@rm -f *.listing
-	@rm -f *.log
-	@rm -f *.out
-	@rm -f *.synctex.gz
-	@rm -f *.toc
-	@rm -f *.nav
-	@rm -f *.snm
-	@rm -f *.vrb
-	@rm -f *.bbl
-	@rm -f *.blg
-	@rm -f *.bak[0-9]*
-	@rm -rf _minted-*
-	@rm -f chapters/options.cfg
-	@rm -f chapters/*.pdf
-	@rm -f chapters/*.aux
-	@rm -f chapters/*.fdb_latexmk
-	@rm -f chapters/*.fls
-	@rm -f chapters/*.len
-	@rm -f chapters/*.listing
-	@rm -f chapters/*.log
-	@rm -f chapters/*.out
-	@rm -f chapters/*.synctex.gz
-	@rm -f chapters/*.toc
-	@rm -f chapters/*.nav
-	@rm -f chapters/*.snm
-	@rm -f chapters/*.vrb
-	@rm -f chapters/*.bbl
-	@rm -f chapters/*.blg
-	@rm -f chapters/*.bak[0-9]*
-	@rm -rf chapters/_minted-*
+	@find . -wholename '**/options.cfg' -delete
+	@find . -maxdepth 1 -wholename '**/*.pdf' -delete
+	@find ./chapters -maxdepth 1 -wholename '**/*.pdf' -delete
+	@find . -wholename '**/*.aux' -delete
+	@find . -wholename '**/*.fdb_latexmk' -delete
+	@find . -wholename '**/*.fls' -delete
+	@find . -wholename '**/*.len' -delete
+	@find . -wholename '**/*.listing' -delete
+	@find . -wholename '**/*.log' -delete
+	@find . -wholename '**/*.out' -delete
+	@find . -wholename '**/*.synctex.gz' -delete
+	@find . -wholename '**/*.toc' -delete
+	@find . -wholename '**/*.nav' -delete
+	@find . -wholename '**/*.snm' -delete
+	@find . -wholename '**/*.vrb' -delete
+	@find . -wholename '**/*.bbl' -delete
+	@find . -wholename '**/*.blg' -delete
+	@find . -wholename '**/*.idx' -delete
+	@find . -wholename '**/*.ilg' -delete
+	@find . -wholename '**/*.ind' -delete
+	@find . -wholename '**/*.pyg' -delete
+	@find . -wholename '**/*.bak[0-9]*' -delete
+	@find . -wholename '**/_minted-*' -delete
 	@make -C code clean
+	@echo -e "\e[1;44mDone cleaning up leftover build files.$<\e[0m"
 
 cleanBuild:
-	@echo "Cleaning build..."
-	@rm -rf build
-	@make -C code cleanBuild
+	@echo -e "\e[1;34mCleaning up build directory...$<\e[0m"
+	@rm -rf $(OUT_DIR)
+	@echo -e "\e[1;44mDone cleaning up build directory.$<\e[0m"
 
 cleanAll: clean cleanBuild
