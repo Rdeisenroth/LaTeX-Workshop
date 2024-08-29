@@ -27,37 +27,31 @@ jobs:
     steps:
       # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2. Link texmf folder to the current texmf home
-      - name: Link texmf folder to the current texmf home
-        run: |
-          ln -s /root/texmf $(kpsewhich -var-value=TEXMFHOME)
-          texhash --verbose
-
-      # 3. Build the document
+      # 2. Build the document
       - name: "Build the document"
         run: |
           CI_RUN=1 make -j $(nproc)
           mv build/*.pdf .
 
-      # 4. Upload artifacts to GitHub
+      # 3. Upload artifacts to GitHub
       - name: Upload artifacts to GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: LaTeX-Workshop Folien
           path: "*.pdf"
           if-no-files-found: error
       
-      # 5. Get Date
+      # 4. Get Date
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H-%M-%S.%N')"
 
-      # 6. create a release
+      # 5. create a release
       - name: Create a release
         if: ${{ !env.ACT && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && github.event_name == 'push' }}
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

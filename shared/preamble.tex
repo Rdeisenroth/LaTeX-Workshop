@@ -42,7 +42,7 @@
 % Ophase-Einstellungen
 \ExplSyntaxOn
 \def\summerOrWinter{Winter}
-\bool_if:nTF {\int_compare_p:n {\the\month > 4} && \int_compare_p:n {\the\month < 10}}{
+\bool_if:nT {\int_compare_p:n {\the\month > 4} && \int_compare_p:n {\the\month < 10}}{
     \def\summerOrWinter{Sommer}
 }
 \def\ophase{\summerOrWinter{}ophase}
