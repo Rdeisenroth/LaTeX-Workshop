@@ -16,10 +16,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build_latex"
-  build_latex:
+  # This workflow contains a single job called "build"
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    # automatically cancel the workflow if it runs longer than 10 minutes
+    timeout-minutes: 10
+    # The docker image to use for the container
     container:
       image: ghcr.io/tudalgo/algotex:latest
 
@@ -32,7 +35,7 @@ jobs:
       # 2. Build the document
       - name: "Build the document"
         run: |
-          CI_RUN=1 make -j $(nproc)
+          make -j $(nproc)
           mv build/*.pdf .
 
       # 3. Upload artifacts to GitHub
@@ -41,7 +44,7 @@ jobs:
         with:
           name: LaTeX-Workshop Folien
           path: "*.pdf"
-          if-no-files-found: error
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
       
       # 4. Get Date
       - name: Get current date

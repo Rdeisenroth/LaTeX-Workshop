@@ -96,7 +96,6 @@ clean:
 	@echo -e "\e[1;44mDone cleaning up leftover build files.$<\e[0m"
 
 cleanBuild:
-	$(MAKE) cleanCode
 	@echo -e "\e[1;34mCleaning up build directory...$<\e[0m"
 	@rm -rf $(OUT_DIR)
 	@echo -e "\e[1;44mDone cleaning up build directory.$<\e[0m"
