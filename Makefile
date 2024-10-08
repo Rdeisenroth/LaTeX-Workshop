@@ -1,3 +1,4 @@
+.DEFAULT_GOAL := all
 
 OUT_DIR := build/
 FILES := $(wildcard *.tex)
@@ -31,11 +32,11 @@ all:
 
 $(FILES:.tex=.tex.regular):
 	$(eval FILE := $(patsubst %.tex.regular,%.tex,$@))
-	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%,$(FILE)),)
+	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%,$(notdir $(FILE))),)
 
 $(FILES:.tex=.tex.darkmode):
 	$(eval FILE := $(patsubst %.tex.darkmode,%.tex,$@))
-	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%-darkmode,$(FILE)),DARK_MODE=1)
+	$(call build_latex_with_jobname_and_env,$(FILE),$(patsubst %.tex,%-dark,$(notdir $(FILE))),DARK_MODE=1)
 
 $(FILES:.tex=.tex.highcontrast):
 	$(eval FILE := $(patsubst %.tex.highcontrast,%.tex,$@))

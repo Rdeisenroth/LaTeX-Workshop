@@ -35,7 +35,7 @@ jobs:
       # 2. Build the document
       - name: "Build the document"
         run: |
-          make -j $(nproc)
+          make -j
           mv build/*.pdf .
 
       # 3. Upload artifacts to GitHub
@@ -45,7 +45,7 @@ jobs:
           name: LaTeX-Workshop Folien
           path: "*.pdf"
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
-      
+
       # 4. Get Date
       - name: Get current date
         id: date
