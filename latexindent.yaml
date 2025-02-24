@@ -1,4 +1,4 @@
-# Formatting Settings by Ruben Deisenroth
+# latexindent formatting settings by Ruben Deisenroth
 fileExtensionPreference:
   .tex: 1
   .sty: 2
